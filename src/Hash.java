@@ -32,6 +32,10 @@ public class Hash {
 
     // @return - returns true if this hash meets the criteria for validity, i.e., its first three indices contain zeroes.
     public boolean isValid(){
+        if (hash.length < 3) { // checks to see if the byte array is at least a lenght of 3 long
+            return false;
+        } // if 
+
         for(int i = 0; i < 3; i++) {
             if (hash[i] != 0) {
                 return false;
@@ -45,7 +49,7 @@ public class Hash {
     public String toString(){
         String sHash = "";
         for(int i = 0; i < hash.length; i ++) {
-            sHash = sHash.concat(String.format("%02x", Byte.toUnsignedInt(hash[i])));
+            sHash = sHash.concat(String.format("%02X", Byte.toUnsignedInt(hash[i])));
         } // for
         return sHash;
     } // toString
