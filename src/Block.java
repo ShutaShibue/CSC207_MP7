@@ -17,6 +17,7 @@ public class Block {
     Hash prevHash;
     long nonce;
     // Constructor
+    // Micah was not sure about mining in the constructor ------------------------------------------------------------ 
 
     public Block(int num, int amount, Hash prevHash) {
         this.num = num;
