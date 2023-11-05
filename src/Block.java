@@ -83,7 +83,7 @@ public class Block {
             for (long i = 0; i < Long.MAX_VALUE - 1; i++) {
                 MessageDigest mdCopy = (MessageDigest) md.clone();
                 mdCopy.update(ByteBuffer.allocate(8).putLong(i).array());
-                byte[] hash = md.digest();
+                byte[] hash = mdCopy.digest();
 
                 Hash tmpHash = new Hash(hash);
                 if (tmpHash.isValid()) {
