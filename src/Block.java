@@ -2,6 +2,7 @@ import java.nio.ByteBuffer;
 import java.security.DigestException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.NoSuchElementException;
 
 public class Block {
 
@@ -24,9 +25,10 @@ public class Block {
         this.amount = amount;
         this.prevHash = prevHash;
         try {
-            mine();
+            this.nonce = mine();
         } catch (NoSuchAlgorithmException | DigestException e) {
             e.printStackTrace();
+            System.err.println("No nonce was found");
         }
     }
 
@@ -73,7 +75,7 @@ public class Block {
         }
     }
 
-    void mine() throws NoSuchAlgorithmException, DigestException {
+    long mine() throws NoSuchAlgorithmException, DigestException {
         MessageDigest md = MessageDigest.getInstance("sha-256");
 
         try {
@@ -88,10 +90,10 @@ public class Block {
 
                 Hash tmpHash = new Hash(hash);
                 if (tmpHash.isValid()) {
-                    this.nonce = i;
-                    return;
+                    return i;
                 }
             }
+            throw new NoSuchElementException();
 
         } catch (CloneNotSupportedException cnse) {
             throw new DigestException("couldn't make digest of partial content");
