@@ -17,9 +17,12 @@ public class Block {
     int amount;
     Hash prevHash;
     long nonce;
-    // Constructor
-    // Micah was not sure about mining in the constructor ------------------------------------------------------------ 
 
+    // Constructor
+
+    /**
+     * Constructor without known nonce. Nonce is automatically calculated.
+     */
     public Block(int num, int amount, Hash prevHash) {
         this.num = num;
         this.amount = amount;
@@ -30,31 +33,49 @@ public class Block {
             e.printStackTrace();
             System.err.println("No nonce was found");
         }
-    }
+    } // Block(int, int, Hash)
 
+    /**
+     * Constructor with known nonce.
+     */
     public Block(int num, int amount, Hash prevHash, long nonce) {
         this.num = num;
         this.amount = amount;
         this.prevHash = prevHash;
         this.nonce = nonce;
-    }
+    } // Block(int, int, Hash, long)
 
+    /**
+     * returns the number of this block.
+     */
     public int getNum() {
         return num;
-    }
+    } // getNum()
 
+    /**
+     * returns the amount transferred that is recorded in this block.
+     */
     public int getAmount() {
         return amount;
-    }
+    } // getAmount()
 
+    /**
+     * returns the nonce of this block.
+     */
     public long getNonce() {
         return nonce;
-    }
+    } // getNonce()
 
+    /**
+     * returns the hash of the previous block in the blockchain.
+     */
     public Hash getPrevHash() {
         return prevHash;
-    }
+    } // getPrevHash()
 
+    /**
+     * returns the hash of this block.
+     */
     public Hash getHash() {
         MessageDigest md;
         try {
@@ -73,8 +94,11 @@ public class Block {
             e.printStackTrace();
             return null;
         }
-    }
+    } // getHash()
 
+    /**
+     * Mines and return nonce.
+     */
     long mine() throws NoSuchAlgorithmException, DigestException {
         MessageDigest md = MessageDigest.getInstance("sha-256");
 
@@ -98,11 +122,14 @@ public class Block {
         } catch (CloneNotSupportedException cnse) {
             throw new DigestException("couldn't make digest of partial content");
         }
-    }
+    } // mine()
 
+    /**
+     * returns a string representation of the block.
+     */
     public String toString() {
         String str = "Block " + getNum() + " (Amount: " + getAmount() + ", Nonce: " + getNonce()
                 + ", prevHash: " + getPrevHash() + ", hash: " + getHash() + ")";
         return str;
-    }
+    } // toString()
 }
