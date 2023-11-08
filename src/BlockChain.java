@@ -26,6 +26,9 @@ public class BlockChain {
     } // getSize()
 
     public void append(Block blk){
+        if(!blocks.get(getSize() - 1).getHash().equals(blk.getPrevHash()))
+            throw new IllegalArgumentException();
+
         blocks.add(blk);
     } // append(Block)
 
