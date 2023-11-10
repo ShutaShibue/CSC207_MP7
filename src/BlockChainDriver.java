@@ -51,6 +51,7 @@ public class BlockChainDriver {
             // checks to see what the input is and uses its corresponding BlockChain method
             if (command.equals("mine")) {
                 ammount = "";
+                sQuit = false; // resets the while exiter
                 while (sQuit == false) { // makes sure ammount input is a #
 
                     ammount = console.readLine("Amount transferred? ");
