@@ -70,7 +70,7 @@ public class BlockChainDriver {
 
                 System.out.println(Chain.toString());
             } else if (command.equals("append")) {
-
+                sQuit = false; // reset while loop exiter
                 ammount = "";
                 while (sQuit == false) { // makes sure ammount input is a #
 

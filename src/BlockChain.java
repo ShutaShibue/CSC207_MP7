@@ -1,21 +1,21 @@
 import java.util.ArrayList;
 
-    /**
-     * Block class to store List of transactions as a chain.
-     *
-     * @author Kevin Johanson, Shuta Shibue
-     */
+/**
+ * Block class to store List of transactions as a chain.
+ *
+ * @author Kevin Johanson, Shuta Shibue
+ */
 
 public class BlockChain {
-    
+
     // Fields
     ArrayList<Block> blocks;
-    
+
     // Constructor
     /**
      * Constructor with initial amount of money in the environment.
      */
-    public BlockChain(int initial){
+    public BlockChain(int initial) {
         blocks = new ArrayList<>();
         blocks.add(new Block(0, initial, null));
     } // BlockChain(int)
@@ -23,39 +23,45 @@ public class BlockChain {
     /**
      * mines a new candidate block to be added to the end of the chain.
      */
-    public Block mine(int amount){
+    public Block mine(int amount) {
         return new Block(getSize(), amount, getHash());
     } // mine(int)
 
     /**
      * returns the size of the blockchain.
      */
-    public int getSize(){
+    public int getSize() {
         return blocks.size();
     } // getSize()
 
     /**
-     * adds this block to the list, throwing an IllegalArgumentException if the block is not following rules.
+     * adds this block to the list, throwing an IllegalArgumentException if the block is not
+     * following rules.
      */
-    public void append(Block blk){
-        if(!blocks.get(getSize() - 1).getHash().equals(blk.getPrevHash()))
-            throw new IllegalArgumentException();
-        if(!blk.getHash().isValid())
-            throw new IllegalArgumentException();
+    public void append(Block blk) {
+        try {
+            if (!blocks.get(getSize() - 1).getHash().equals(blk.getPrevHash()))
+                throw new IllegalArgumentException();
+            if (!blk.getHash().isValid())
+                throw new IllegalArgumentException();
 
-        blocks.add(blk);
-        if(!isValidBlockChain()) {
-            removeLast();
-            throw new IllegalArgumentException();
+            blocks.add(blk);
+            if (!isValidBlockChain()) {
+                removeLast();
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Attempted to append invalid block");
         }
     } // append(Block)
 
     /**
-     * removes the last block from the chain, returning true. 
-     * If the chain only contains a single block, then removeLast does nothing and returns false.
+     * removes the last block from the chain, returning true. If the chain only contains a single
+     * block, then removeLast does nothing and returns false.
      */
-    public boolean removeLast(){
-        if(getSize() == 1) return false;
+    public boolean removeLast() {
+        if (getSize() == 1)
+            return false;
         blocks.remove(getSize() - 1);
         return true;
     } // removeLast()
@@ -63,26 +69,29 @@ public class BlockChain {
     /**
      * returns the hash of the last block in the chain.
      */
-    public Hash getHash(){
+    public Hash getHash() {
         return blocks.get(getSize() - 1).getHash();
     } // getHash()
 
     /**
      * walks the blockchain and ensures that its blocks are consistent and valid.
      */
-    public boolean isValidBlockChain(){
+    public boolean isValidBlockChain() {
         for (int i = 0; i < blocks.size() - 1; i++) {
-            if(!blocks.get(i).getHash().equals(blocks.get(i+1).getPrevHash())) return false;
-            if(!blocks.get(i).getHash().isValid()) return false;
+            if (!blocks.get(i).getHash().equals(blocks.get(i + 1).getPrevHash()))
+                return false;
+            if (!blocks.get(i).getHash().isValid())
+                return false;
         }
-        if(!blocks.get(blocks.size()-1).getHash().isValid()) return false;
+        if (!blocks.get(blocks.size() - 1).getHash().isValid())
+            return false;
         return true;
     } // isValidBlockChain()
 
     /**
      * prints Alexis’s and Blake’s respective balances.
      */
-    public void printBalances(){
+    public void printBalances() {
         int a = blocks.get(0).amount; // Initial amount
         int transaction = 0;
 
@@ -97,7 +106,7 @@ public class BlockChain {
     /**
      * returns a string representation of the BlockChain.
      */
-    public String toString(){  
+    public String toString() {
         String str = "";
         for (Block block : blocks) {
             str += block.toString() + "\n";
