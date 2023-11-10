@@ -29,8 +29,15 @@ public class BlockChainDriver {
             return;
         }
 
-        // also need to check that the argument is an int
-        // --------------------------------------------------------------------------
+        // checks if the arguments is an int
+        try {
+            Integer.parseInt(args[0]);
+            
+        } catch (NumberFormatException e) {
+            System.out.println("not a # ");
+            return;
+        }
+
 
         // creates a new BlockChain with the starting amount given in the first argument
         BlockChain Chain = new BlockChain(Integer.valueOf(args[0]));
@@ -48,7 +55,7 @@ public class BlockChainDriver {
 
                     ammount = console.readLine("Amount transferred? ");
                     try {
-                        int temp = Integer.parseInt(ammount);
+                        Integer.parseInt(ammount);
                         sQuit = true; // to exit the loop
                     } catch (NumberFormatException e) {
                         System.out.println("not a # try again");
@@ -69,7 +76,7 @@ public class BlockChainDriver {
                     ammount = console.readLine("Amount transferred? ");
 
                     try {
-                        int temp = Integer.parseInt(ammount);
+                        Integer.parseInt(ammount);
                         sQuit = true; // to exit the loop
                     } catch (NumberFormatException e) {
                         System.out.println("not a # try again");
@@ -83,7 +90,7 @@ public class BlockChainDriver {
                     nonce = console.readLine("nonce? ");
 
                     try {
-                        int temp = Integer.parseInt(nonce);
+                        Integer.parseInt(nonce);
 
                         // runs the append with the given ammount given nonce the previous hash and the current size of the chain
                         Chain.append(new Block(Chain.getSize(), Integer.valueOf(ammount), Chain.getHash(), Long.parseLong(nonce))); 
