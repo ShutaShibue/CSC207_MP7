@@ -75,6 +75,7 @@ public class BlockChain {
             if(!blocks.get(i).getHash().equals(blocks.get(i+1).getPrevHash())) return false;
             if(!blocks.get(i).getHash().isValid()) return false;
         }
+        if(!blocks.get(blocks.size()-1).getHash().isValid()) return false;
         return true;
     } // isValidBlockChain()
 
