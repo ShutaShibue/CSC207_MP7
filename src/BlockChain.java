@@ -40,8 +40,14 @@ public class BlockChain {
     public void append(Block blk){
         if(!blocks.get(getSize() - 1).getHash().equals(blk.getPrevHash()))
             throw new IllegalArgumentException();
+        if(!blk.getHash().isValid())
+            throw new IllegalArgumentException();
 
         blocks.add(blk);
+        if(!isValidBlockChain()) {
+            removeLast();
+            throw new IllegalArgumentException();
+        }
     } // append(Block)
 
     /**
