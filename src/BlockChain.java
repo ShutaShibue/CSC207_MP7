@@ -24,7 +24,7 @@ public class BlockChain {
      * mines a new candidate block to be added to the end of the chain.
      */
     public Block mine(int amount){
-        return new Block(getSize(), amount, getHash(), amount);
+        return new Block(getSize(), amount, getHash());
     } // mine(int)
 
     /**

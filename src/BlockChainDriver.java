@@ -43,24 +43,24 @@ public class BlockChainDriver {
 
             // checks to see what the input is and uses its corresponding BlockChain method
             if (command.equals("mine")) {
-
+                ammount = "";
                 while (sQuit == false) { // makes sure ammount input is a #
 
                     ammount = console.readLine("Amount transferred? ");
-
                     try {
                         int temp = Integer.parseInt(ammount);
-                        Chain.mine(Integer.valueOf(ammount));
                         sQuit = true; // to exit the loop
                     } catch (NumberFormatException e) {
                         System.out.println("not a # try again");
-                    }
+                    }                    
                 }
+                Block block = Chain.mine(Integer.valueOf(ammount));
 
                 sQuit = false; // resets the while exiter
 
-                System.out.println(Chain.toString());
+                System.out.println("amount = " + ammount +", nonce = " + block.getNonce() + "\n");
 
+                System.out.println(Chain.toString());
             } else if (command.equals("append")) {
 
                 ammount = "";
