@@ -32,7 +32,7 @@ public class BlockChainDriver {
         // checks if the arguments is an int
         try {
             Integer.parseInt(args[0]);
-            
+
         } catch (NumberFormatException e) {
             System.out.println("not a # ");
             return;
@@ -60,13 +60,13 @@ public class BlockChainDriver {
                         sQuit = true; // to exit the loop
                     } catch (NumberFormatException e) {
                         System.out.println("not a # try again");
-                    }                    
+                    }
                 }
                 Block block = Chain.mine(Integer.valueOf(ammount));
 
                 sQuit = false; // resets the while exiter
 
-                System.out.println("amount = " + ammount +", nonce = " + block.getNonce() + "\n");
+                System.out.println("amount = " + ammount + ", nonce = " + block.getNonce() + "\n");
 
                 System.out.println(Chain.toString());
             } else if (command.equals("append")) {
@@ -87,20 +87,22 @@ public class BlockChainDriver {
                 sQuit = false; // reset while loop exiter
 
                 while (sQuit == false) { // makes sure nonce input is a #
-                    
+
                     nonce = console.readLine("nonce? ");
 
                     try {
                         Integer.parseInt(nonce);
 
-                        // runs the append with the given ammount given nonce the previous hash and the current size of the chain
-                        Chain.append(new Block(Chain.getSize(), Integer.valueOf(ammount), Chain.getHash(), Long.parseLong(nonce))); 
+                        // runs the append with the given ammount given nonce the previous hash and
+                        // the current size of the chain
+                        Chain.append(new Block(Chain.getSize(), Integer.valueOf(ammount),
+                                Chain.getHash(), Long.parseLong(nonce)));
                         sQuit = true; // to exit the loop
                     } catch (NumberFormatException e) {
                         System.out.println("not a # try again");
                     }
                 }
-                
+
 
                 System.out.println(Chain.toString());
             } else if (command.equals("remove")) {

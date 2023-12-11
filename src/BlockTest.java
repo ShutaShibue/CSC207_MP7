@@ -2,7 +2,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class BlockTest {
-
+    /**
+     * Implementingg block testing class
+     *
+     * @author Kevin Johanson, Shuta Shibue
+     */
     @Test
     public void Test1() {
         Block block = new Block(0, 300, null);

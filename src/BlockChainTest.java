@@ -3,7 +3,7 @@ import org.junit.Test;
 
 public class BlockChainTest {
     @Test
-    public void BlockChainTest1(){
+    public void BlockChainTest1() {
         BlockChain bc = new BlockChain(300);
         Block block = bc.mine(-100);
         bc.append(block);
